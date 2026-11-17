@@ -3,7 +3,7 @@ FROM python:3.10-slim
 WORKDIR /app
 
 # Install system dependencies required by OpenCV
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get update && apt-get install -y \
     libgl1 \
     libglib2.0-0 \
     && rm -rf /var/lib/apt/lists/*
@@ -12,14 +12,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY requirements.txt .
 
 # Install Python dependencies
-RUN pip install --no-cache-dir --upgrade pip \
-    && pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy application files
+# Copy app files
 COPY . .
 
-# Render port
-EXPOSE 10000
+# Expose port
+EXPOSE 8000
 
-# Start FastAPI application
-CMD ["sh", "-c", "uvicorn app:app --host 0.0.0.0 --port ${PORT:-10000}"]
+# Start FastAPI app with uvicorn
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]

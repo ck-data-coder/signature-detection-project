@@ -54,17 +54,3 @@ async def detect_signatures(file: UploadFile = File(...)):
     return {"signatures_found": len(crops), "crops": crops}
 
 
-@app.get("/health")
-async def health():
-    import os
-    import psutil
-
-    process = psutil.Process(os.getpid())
-
-    return {
-        "status": "running",
-        "memory_mb": round(
-            process.memory_info().rss / (1024 * 1024), 2
-        ),
-        "model_loaded": model is not None
-    }

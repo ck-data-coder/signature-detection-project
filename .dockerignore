@@ -1,0 +1,22 @@
+# Node dependencies
+node_modules
+npm-debug.log
+yarn.lock
+package-lock.json
+
+# Build outputs (we rebuild inside container anyway)
+build
+dist
+
+# OS / Editor files
+.DS_Store
+Thumbs.db
+*.swp
+
+# Git files
+.git
+.gitignore
+
+# Docker files
+Dockerfile
+.dockerignore
